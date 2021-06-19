@@ -2,7 +2,7 @@
 
 Kurs tengah BI dalam JSON API yang realtime berdasarkan website BI (https://www.bi.go.id/id/statistik/informasi-kurs/transaksi-bi/default.aspx)
 
-```markdown
+```
 GET http://localhost:8080/latest
 
 {
@@ -34,4 +34,5 @@ GET http://localhost:8080/latest
     "CNH": 223387.5
   },
   "updateDate": "2021-06-18"
-}```
+}
+```
