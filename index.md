@@ -1,37 +1,37 @@
-## Welcome to GitHub Pages
+## |<urs
 
-You can use the [editor on GitHub](https://github.com/desukyu/kurs/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Kurs tengah BI dalam JSON API yang realtime berdasarkan website BI (https://www.bi.go.id/id/statistik/informasi-kurs/transaksi-bi/default.aspx)
 
 ```markdown
-Syntax highlighted code block
+GET http://localhost:8080/latest
 
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/desukyu/kurs/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+{
+  "baseCurrency": "IDR",
+  "rates": {
+    "CHF": 1573861.5,
+    "HKD": 185189.5,
+    "EUR": 1717885.0,
+    "DKK": 230990.5,
+    "SAR": 383393.0,
+    "CAD": 1167756.5,
+    "MYR": 347295.5,
+    "USD": 1437800.0,
+    "NOK": 168801.5,
+    "VND": 62.5,
+    "CNY": 223519.5,
+    "THB": 45789.5,
+    "KRW": 1270.5,
+    "SGD": 1074188.5,
+    "JPY": 12993.545,
+    "GBP": 2009614.5,
+    "PGK": 409827.0,
+    "LAK": 152.0,
+    "SEK": 168736.5,
+    "BND": 1074188.5,
+    "KWD": 4773770.0,
+    "NZD": 1014657.0,
+    "PHP": 29688.5,
+    "CNH": 223387.5
+  },
+  "updateDate": "2021-06-18"
+}```
