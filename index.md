@@ -1,6 +1,6 @@
 ## |<urs
 
-Kurs tengah BI dalam JSON API yang realtime berdasarkan website BI (https://www.bi.go.id/id/statistik/informasi-kurs/transaksi-bi/default.aspx)
+Kurs tengah BI dalam JSON API secara realtime.
 
 ```
 GET http://localhost:8080/latest
