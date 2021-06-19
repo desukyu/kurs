@@ -1,6 +1,6 @@
-## |<urs
+## kurs
 
-Kurs tengah BI dalam JSON API secara realtime.
+|<urs tengah BI dalam JSON API secara realtime.
 
 ```
 GET http://localhost:8080/latest
