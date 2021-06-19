@@ -1,5 +1,14 @@
 ## kurs
 
+Proyek ini menggunakan Quarkus, the Supersonic Subatomic Java Framework.
+
+Untuk tahu lebih lanjut tentang Quarkus, silahkan akses website mereka: https://quarkus.io/ .
+
+## Menjalankan aplikasi dalam dev mode
+
+```shell script
+./mvnw compile quarkus:dev
+```
 
 ```
 GET http://localhost:8080/latest
