@@ -1,7 +1,7 @@
-package org.kabanyo.kurs;
+package io.kabanyo.kurs;
 
-import org.kabanyo.kurs.model.Kurs;
-import org.kabanyo.kurs.service.BankIndonesiaKursService;
+import io.kabanyo.kurs.model.Kurs;
+import io.kabanyo.kurs.service.BankIndonesiaKursService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;

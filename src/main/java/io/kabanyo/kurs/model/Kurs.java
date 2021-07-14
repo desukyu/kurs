@@ -1,4 +1,4 @@
-package org.kabanyo.kurs.model;
+package io.kabanyo.kurs.model;
 
 import java.time.LocalDate;
 import java.util.Date;

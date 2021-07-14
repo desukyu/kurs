@@ -1,4 +1,4 @@
-package org.kabanyo.kurs;
+package io.kabanyo.kurs;
 
 import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;

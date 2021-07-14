@@ -1,15 +1,14 @@
-package org.kabanyo.kurs.service;
+package io.kabanyo.kurs.service;
 
+import io.kabanyo.kurs.model.Kurs;
 import org.jboss.logging.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import org.kabanyo.kurs.exception.KursException;
-import org.kabanyo.kurs.model.Kurs;
+import io.kabanyo.kurs.exception.KursException;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
