@@ -1,4 +1,4 @@
-package org.kabanyo.kurs.exception;
+package io.kabanyo.kurs.exception;
 
 public class KursException extends RuntimeException {
 
