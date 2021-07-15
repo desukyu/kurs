@@ -1,24 +1,23 @@
 package io.kabanyo.kurs.model;
 
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Map;
 
 public class Kurs {
 
-	private String baseCurrency;
+	private String targetCurrency;
 	private LocalDate updateDate;
 	private Map<String, Double> rates;
 
 	public Kurs() {
 	}
 
-	public String getBaseCurrency() {
-		return baseCurrency;
+	public String getTargetCurrency() {
+		return targetCurrency;
 	}
 
-	public void setBaseCurrency(String baseCurrency) {
-		this.baseCurrency = baseCurrency;
+	public void setTargetCurrency(String targetCurrency) {
+		this.targetCurrency = targetCurrency;
 	}
 
 	public LocalDate getUpdateDate() {
