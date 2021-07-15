@@ -9,6 +9,8 @@ import io.kabanyo.kurs.exception.KursException;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.io.IOException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -18,14 +20,14 @@ import java.util.Map;
 @ApplicationScoped
 public class BankIndonesiaKursService {
 
-	public static final String BASE_CURRENCY = "IDR";
+	public static final String TARGET_CURRENCY = "IDR";
 	public static final String BI_KURS_URL = "https://www.bi.go.id/id/statistik/informasi-kurs/transaksi-bi/default.aspx";
 
 	private static final Logger LOG = Logger.getLogger(BankIndonesiaKursService.class);
 
 	public Kurs latest() {
 		Kurs kurs = new Kurs();
-		kurs.setBaseCurrency(BASE_CURRENCY);
+		kurs.setTargetCurrency(TARGET_CURRENCY);
 		kurs.setUpdateDate(findLatestUpdateDate());
 		kurs.setRates(findLatestKurs());
 		return kurs;
@@ -40,6 +42,8 @@ public class BankIndonesiaKursService {
 			throw new KursException(KursException.FAILED_TO_CONNECT);
 		}
 
+		NumberFormat numberFormat = NumberFormat.getNumberInstance();
+
 		Map<String, Double> result = new HashMap<>();
 		Elements rateTable = doc.select("#tableData .page-table:eq(1) table tbody tr");
 
@@ -49,10 +53,18 @@ public class BankIndonesiaKursService {
 			if (rateRow.size() >=4 ) {
 				String currency = rateRow.get(0).text();
 
-				Double value = Double.valueOf(rateRow.get(1).text().replace(",", ".").replace(".",""));
-				Double sell = Double.valueOf(rateRow.get(2).text().replace(",", ".").replace(".",""));
-				Double buy = Double.valueOf(rateRow.get(3).text().replace(",", ".").replace(".",""));
-				result.put(currency, (sell + buy) / (2 * value));
+				Double value = null;
+				Double sell = null;
+				Double buy = null;
+				try {
+					value = numberFormat.parse(rateRow.get(1).text()).doubleValue();
+					sell = numberFormat.parse(rateRow.get(2).text()).doubleValue();
+					buy = numberFormat.parse(rateRow.get(3).text()).doubleValue();
+				} catch (ParseException e) {
+					throw new KursException(KursException.FAILED_TO_PARSE_NUMBER);
+				} finally {
+					result.put(currency, (sell + buy) / (2 * value));
+				}
 			}
 		});
 		return result;
