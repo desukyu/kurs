@@ -5,11 +5,20 @@ import java.util.Map;
 
 public class Kurs {
 
+	private String sourceCurrency;
 	private String targetCurrency;
 	private LocalDate updateDate;
 	private Map<String, Double> rates;
 
 	public Kurs() {
+	}
+
+	public String getSourceCurrency() {
+		return sourceCurrency;
+	}
+
+	public void setSourceCurrency(String sourceCurrency) {
+		this.sourceCurrency = sourceCurrency;
 	}
 
 	public String getTargetCurrency() {
