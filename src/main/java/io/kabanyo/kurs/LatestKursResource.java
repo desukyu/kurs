@@ -2,6 +2,7 @@ package io.kabanyo.kurs;
 
 import io.kabanyo.kurs.model.Kurs;
 import io.kabanyo.kurs.service.BankIndonesiaKursService;
+import io.kabanyo.kurs.service.PajakKursService;
 import io.kabanyo.kurs.service.ReutersKursService;
 
 import javax.inject.Inject;
@@ -19,6 +20,9 @@ public class LatestKursResource {
     @Inject
     private ReutersKursService reutersKursService;
 
+    @Inject
+    private PajakKursService pajakKursService;
+
     @Path("/bi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -31,5 +35,12 @@ public class LatestKursResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Kurs latestReutersKurs() {
         return reutersKursService.latest();
+    }
+
+    @Path("/pajak")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Kurs latestPajakKurs() {
+        return pajakKursService.latest();
     }
 }
