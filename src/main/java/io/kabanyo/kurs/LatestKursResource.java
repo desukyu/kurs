@@ -15,14 +15,19 @@ import javax.ws.rs.core.MediaType;
 public class LatestKursResource {
 
     @Inject
-    private BankIndonesiaKursService bankIndonesiaKursService;
+    BankIndonesiaKursService bankIndonesiaKursService;
 
     @Inject
-    private ReutersKursService reutersKursService;
+    ReutersKursService reutersKursService;
 
     @Inject
-    private PajakKursService pajakKursService;
+    PajakKursService pajakKursService;
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Kurs latestDefault() {
+        return bankIndonesiaKursService.latest();
+    }
     @Path("/bi")
     @GET
     @Produces(MediaType.APPLICATION_JSON)

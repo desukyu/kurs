@@ -39,7 +39,7 @@ public class PajakKursService {
     }
 
     private Map<String, Double> findLatestKurs() {
-        Document doc = null;
+        Document doc;
         try {
             doc = Jsoup.connect(PAJAK_KURS_URL).get();
         } catch (IOException e) {
