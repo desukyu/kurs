@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -25,28 +26,41 @@ public class PajakKursService {
     public static final String JPY = "JPY";
 
     private static final Logger LOG = Logger.getLogger(PajakKursService.class);
+    private Document doc;
 
     public Kurs latest() {
+        loadDocument(null);
         Kurs result = new Kurs();
         result.setTargetCurrency(TARGET_CURRENCY);
         result.setUpdateDate(findLatestUpdateDate());
-        result.setRates(findLatestKurs());
+        result.setRates(getKursMap());
         return result;
     }
 
-    private LocalDate findLatestUpdateDate() {
-        return LocalDate.now();
+    public Kurs findByDate(LocalDate date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        loadDocument(date.format(formatter));
+        Kurs result = new Kurs();
+        result.setTargetCurrency(TARGET_CURRENCY);
+        result.setUpdateDate(findLatestUpdateDate());
+        result.setRates(getKursMap());
+        return result;
     }
 
-    private Map<String, Double> findLatestKurs() {
-        Document doc;
+    private void loadDocument(String dateParameter) {
+        String url = PAJAK_KURS_URL;
+        if (dateParameter != null) {
+            url = url + "?date=" + dateParameter;
+        }
         try {
-            doc = Jsoup.connect(PAJAK_KURS_URL).get();
+            doc = Jsoup.connect(url).get();
         } catch (IOException e) {
             LOG.error(KursException.FAILED_TO_CONNECT);
             throw new KursException(KursException.FAILED_TO_CONNECT);
         }
+    }
 
+    private Map<String, Double> getKursMap() {
         NumberFormat numberFormat = NumberFormat.getNumberInstance(new Locale("in", "ID"));
 
         Map<String, Double> result = new HashMap<>();
@@ -71,5 +85,20 @@ public class PajakKursService {
 
         });
         return result;
+    }
+
+    private LocalDate findLatestUpdateDate() {
+        Elements dateElements = doc.select(".main-content .text-muted");
+        String elementText = dateElements.get(0).text();
+        int beginIndex = elementText.indexOf(':') + 1;
+        int endIndex = elementText.indexOf('-') - 1;
+        String dateString = elementText.substring(beginIndex, endIndex).trim();
+
+        Locale.setDefault(new Locale("in", "ID"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy");
+
+        LocalDate localDate = LocalDate.parse(dateString, formatter);
+
+        return localDate;
     }
 }
